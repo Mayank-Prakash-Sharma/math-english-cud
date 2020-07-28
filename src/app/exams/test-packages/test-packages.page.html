@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>test-packages</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- If there are packages -->
+  <!-- We use async pipe because testPackages is an observable -->
+  <ion-grid *ngIf="(testPackages | async)?.length > 0">
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" text-center>
+        <ion-list>
+          <!-- We use async pipe because testPackages is an observable -->
+          <ion-item *ngFor="let package of (testPackages | async)" [routerLink]="['/', 'exams', 'test-packages', package.id]" detail>   
+            <ion-label>
+              <p>{{ package.id }}</p>
+              <h2>{{ package.title }}</h2>
+              <p>{{ package.description }}</p>
+              <p>{{ package.price | currency: 'INR'}}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

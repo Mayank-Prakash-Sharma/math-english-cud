@@ -1,0 +1,42 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>exams</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <!-- Adding Segmented buttons on the top to switch between free and purchased video class packages
+  <ion-segment value="free-exam" (ionChange)="onFilterUpdate($event)">
+    <ion-segment-button value="free-exam">Free Video Classes</ion-segment-button>
+    <ion-segment-button value="purchased-exam">Purchased Video Packages</ion-segment-button>
+  </ion-segment> -->
+
+  <!-- If there are no packages -->
+  <ion-grid *ngIf="!loadedExams || loadedExams.length <= 0">
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" text-center>
+        <p>There are no Test Pakages purchased by you. </p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <!-- If there are packages -->
+  <ion-grid *ngIf="loadedExams.length > 0">
+    <ion-row>
+      <ion-col size="12" size-sm="8" offset-sm="2" text-center>
+        <ion-list>
+          <!-- Creating a for loop for the array containing our exam objects. 
+            Putting a router link to enable dynamic routing to the next page and passing the exam id as url parameter. 
+            detail - it showcases an arrow in front of ion-items, which lets the user know that the item is clickable. -->
+          <ion-item *ngFor="let exam of loadedExams" [routerLink]="['/', 'exams', exam.id]" detail> 
+            <ion-label>
+              <p>{{ exam.id }}</p>
+              <h2>{{ exam.title }}</h2>
+              <p>{{ exam.description }}</p>
+            </ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
